@@ -1,5 +1,6 @@
 .python-version
 .env
+.envalex
 models
 build
 logs/
