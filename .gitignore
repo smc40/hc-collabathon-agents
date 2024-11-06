@@ -33,3 +33,9 @@ ENV/
 
 # notebooks
 notebooks/
+
+
+
+errors/
+agent_workspace/
+collabathon_workspace/
