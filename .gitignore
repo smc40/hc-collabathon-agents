@@ -32,6 +32,3 @@ ENV/
 
 # notebooks
 notebooks/
-
-# data dir
-data/*

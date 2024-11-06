@@ -1,5 +1,5 @@
-from swarms.structs.moa import MOA, Agent as SwarmAgent, Message
-
+from swarms import MixtureOfAgents, Agent as SwarmAgent, Message
+import os
 
 class Agent(SwarmAgent):
     """A generic agent that uses Swarms to discuss topic relevance."""
@@ -22,7 +22,7 @@ class Agent(SwarmAgent):
         print(f"{self.name} thinks the input is {relevance} to '{topic}'.")
 
 
-class MixtureOfAgents(MOA):
+class MixtureOfAgents(MixtureOfAgents):
     """Environment where agents discuss input relevance to a topic."""
 
     def __init__(self):
