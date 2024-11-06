@@ -1,64 +1,56 @@
-import ollama
+from swarms.structs.moa import MOA, Agent as SwarmAgent, Message
 
 
-class Agent:
-    """A generic agent that uses Ollama to discuss topic relevance."""
+class Agent(SwarmAgent):
+    """A generic agent that uses Swarms to discuss topic relevance."""
 
     def __init__(self, name, expertise):
-        self.name = name
+        super().__init__(name=name)  # Initialize with Swarms agent structure
         self.expertise = expertise  # The specific topic or stance of the agent
 
-    def discuss(self, input_text, topic):
-        """Discusses if the input text relates to a given topic using Ollama."""
-        # Define the prompt to ask Ollama
-        messages = [
-            {
-                "role": "system",
-                "content": f"You are an expert with the following expertise: {self.expertise}. Please evaluate if the following text is related to {topic}. Respond with 'Relevant' or 'Not Relevant' only.",
-            },
-            {
-                "role": "user",
-                "content": input_text,
-            },
-        ]
+    def process_message(self, message: Message):
+        """Processes a message to evaluate relevance."""
+        input_text = message.content
+        topic = message.metadata.get("topic")
 
-        # Call Ollama chat
-        response = ollama.chat(
-            model="llama3.2",
-            messages=messages,
-        )
+        # Logic to evaluate relevance based on expertise
+        if self.expertise in input_text:  # Simplified check for example
+            relevance = "Relevant"
+        else:
+            relevance = "Not Relevant"
 
-        # Process response
-        relevance = response["message"]["content"].strip()
-        print(
-            f"{self.name} thinks the input is {relevance} to '{topic}'."
-        )
+        print(f"{self.name} thinks the input is {relevance} to '{topic}'.")
 
 
-class MixtureOfAgents:
+class MixtureOfAgents(MOA):
     """Environment where agents discuss input relevance to a topic."""
 
     def __init__(self):
         # Initialize agents with different expertise
-        self.agents = [
+        agents = [
             Agent(
                 name="Quality_Assurance",
-                expertise="QA Officers are responsible for establishing and monitoring quality standards and compliance protocols across product lifecycles, from development to market approval. They conduct audits, oversee Good Manufacturing Practice (GMP) compliance, and ensure that product development and manufacturing processes meet regulatory standards. This role also involves identifying and mitigating risks to quality and compliance, often liaising with production and clinical teams to implement corrective and preventive actions as needed.",
+                expertise="QA Officers are responsible for establishing and monitoring quality standards...",
             ),
             Agent(
                 name="Clinical_Evaluator",
-                expertise="Clinical Evaluators focus on assessing the safety, efficacy, and quality of products through reviewing clinical trial data and real-world evidence. They analyze clinical study designs, results, and adverse event reports to provide evidence-based recommendations.",
+                expertise="Clinical Evaluators focus on assessing the safety, efficacy, and quality of products...",
             ),
             Agent(
                 name="Regulatory_Affairs_Specialist",
-                expertise="This role involves coordinating and managing regulatory submissions, ensuring that all product data and documentation comply with local and international regulations. Regulatory Affairs Specialists often work closely with product developers to prepare, submit, and follow up on applications with regulatory bodies.",
+                expertise="This role involves coordinating and managing regulatory submissions...",
             ),
         ]
+        super().__init__(agents=agents)
 
     def conduct_discussion(self, input_text, topic):
         print(f"Discussion on topic: '{topic}' for input: '{input_text}'\n")
+        
+        message = Message(content=input_text, metadata={"topic": topic})
+        
+        # Dispatch the message to each agent in the MOA
         for agent in self.agents:
-            agent.discuss(input_text, topic)
+            agent.process_message(message)
 
 
 # Instantiate the environment and conduct a discussion
