@@ -1,8 +1,10 @@
 from openai import OpenAI
-client = OpenAI()
 
 class Agent:
     """A generic agent that uses OpenAI's API to discuss topic relevance."""
+
+
+    client = OpenAI()
 
     def __init__(self, name, expertise):
         self.name = name
@@ -23,7 +25,7 @@ class Agent:
         ]
 
         # Call OpenAI's chat API
-        response = client.chat.completions.create(
+        response = self.client.chat.completions.create(
             model="gpt-4o-mini",
             messages=messages
         )
@@ -77,9 +79,11 @@ class MixtureOfAgents:
         print(f"\nMajority decision: The input is {final_decision} to the topic.\n")
 
 
-# Instantiate the environment and conduct a discussion
-environment = MixtureOfAgents()
-input_text = """
-The high-throughput and liver-on-chip systems exhibit enhanced in vivo-like functions and demonstrate the potential utility of these platforms for DILI risk assessment. Tenofovir-inarigivr-associated hepatotoxicity was observed and correlates with the clinical manifestation of DILI observed in patients."""
-topic = "DILI"
-environment.conduct_discussion(input_text, topic)
+if __name__ == '__main__':
+
+    # Instantiate the environment and conduct a discussion
+    environment = MixtureOfAgents()
+    input_text = """
+    The high-throughput and liver-on-chip systems exhibit enhanced in vivo-like functions and demonstrate the potential utility of these platforms for DILI risk assessment. Tenofovir-inarigivr-associated hepatotoxicity was observed and correlates with the clinical manifestation of DILI observed in patients."""
+    topic = "DILI"
+    environment.conduct_discussion(input_text, topic)
