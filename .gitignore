@@ -1,0 +1,37 @@
+.python-version
+.env
+models
+build
+logs/
+.cache/
+.coverage*
+
+# Byte-compiled / optimized / .DS_Store files
+__pycache__/
+*.py[cod]
+.DS_Store
+*.swp
+
+# Virtual environment
+venv/
+venve/
+ENV/
+
+# PyCharm project settings
+.idea/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# pytest cache
+.pytest_cache/
+
+# mypy cache
+.mypy_cache/
+.vscode/settings.json
+
+# notebooks
+notebooks/
+
+# data dir
+data/*
