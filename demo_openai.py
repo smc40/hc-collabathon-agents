@@ -64,7 +64,8 @@ class MixtureOfAgents:
         for agent in self.agents:
             relevance = agent.discuss(input_text, topic)
             results.append(relevance)
-        self.majority_vote(results)
+        res = self.majority_vote(results)
+        return res
 
     def majority_vote(self, results):
         """Determines the majority relevance based on agent responses."""
@@ -76,7 +77,7 @@ class MixtureOfAgents:
         else:
             final_decision = "Not Relevant"
 
-        print(f"\nMajority decision: The input is {final_decision} to the topic.\n")
+        return (f"\nMajority decision: The input is {final_decision} to the topic.\n")
 
 
 if __name__ == '__main__':
