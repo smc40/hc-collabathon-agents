@@ -170,6 +170,9 @@ st.title("Multi-Agent DILI Detection Prototype")
 # Chat input for drug name
 user_input = st.chat_input("Enter the name of the drug eg. tamaxophin")
 
+with st.sidebar:
+    st.markdown("Available drugs:\n" + "\n".join(f"- {drug}" for drug in pdf_dict.keys()))
+
 # Process user input from either chat input or button selection
 if user_input:
     st.session_state.messages = st.session_state.get("messages", [])

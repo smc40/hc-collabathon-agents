@@ -69,8 +69,10 @@ class MixtureOfAgents:
 
     def majority_vote(self, results):
         """Determines the majority relevance based on agent responses."""
-        relevant_count = results.count("Relevant")
-        not_relevant_count = results.count("Not Relevant")
+        votes = [i.content for i in results]
+        print(votes)
+        relevant_count = len([i for i in votes if i.lower() =="relevant"])
+        not_relevant_count = len([i for i in votes if i.lower() =="not relevant"])
 
         if relevant_count > not_relevant_count:
             final_decision = "Relevant"
