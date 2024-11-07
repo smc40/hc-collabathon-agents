@@ -2,7 +2,7 @@
 This repository was created on November 6th and 7th during a joing Collabathon.
 
 ## Requirements
->=python3.10
+- python3.10 or above
 
 ## Setup
 
