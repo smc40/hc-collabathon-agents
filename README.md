@@ -1,11 +1,20 @@
 ### Usecase to explore Multi-Agents in Regulatory Sciences
+This repository was created on November 6th and 7th during a joing Collabathon.
 
->=python3.10 required
+## Requirements
+>=python3.10
 
+## Setup
 
+Run some independet files:
 ```
 python3.10 -m venv venv
-pip install req_alex.txt
+pip install requirements.txt
 source .env
 python demo_ollama.py
+```
+
+Run the streamlit app:
+```
+python streamlit streamlit_app.py
 ```
