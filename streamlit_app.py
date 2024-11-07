@@ -3,7 +3,7 @@ import openai
 from swarm import Swarm, Agent
 import os, re
 import PyPDF2
-from demo_openai import MixtureOfAgents
+from src.demo_openai import MixtureOfAgents
 
 # Load environment variables from .env file
 with open('.env', 'r') as env_file:
