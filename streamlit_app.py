@@ -6,7 +6,7 @@ import PyPDF2
 from demo_openai import MixtureOfAgents
 
 # Load environment variables from .env file
-with open('.envalex', 'r') as env_file:
+with open('.env', 'r') as env_file:
     for line in env_file.readlines():
         key, val = re.split('=', line.strip())
         os.environ[key] = val
@@ -167,6 +167,10 @@ agent_d = Agent(
 # Streamlit App
 st.title("Multi-Agent DILI Detection Prototype")
 
+with st.expander("See Agent Architecture"):
+    st.image("./img/architecture.png")
+
+
 # Chat input for drug name
 user_input = st.chat_input("Enter the name of the drug eg. tamaxophin")
 
@@ -175,6 +179,9 @@ with st.sidebar:
 
 # Process user input from either chat input or button selection
 if user_input:
+    with st.chat_message("user"):
+        st.write(user_input)
+
     st.session_state.messages = st.session_state.get("messages", [])
     
     # Add user message
