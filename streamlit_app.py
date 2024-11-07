@@ -179,6 +179,9 @@ with st.sidebar:
 
 # Process user input from either chat input or button selection
 if user_input:
+    with st.chat_message("user"):
+        st.write(user_input)
+
     st.session_state.messages = st.session_state.get("messages", [])
     
     # Add user message
